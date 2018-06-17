@@ -35,7 +35,7 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Parse template
-	t := template.Must(template.ParseFiles("templates/layout.html"))
+	t := template.Must(template.ParseFiles("templates/layout.html", "templates/style.html"))
 
 	// create page data for template
 	data := PageData{
