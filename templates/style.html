@@ -11,13 +11,13 @@
     min-height: 100%;
     margin: 0;
     padding: 0;
+    color: black;
   }
 
   body {
-    font-size: 16px;
+    font-size: 12px;
     overflow-x: hidden;
-    font-family: Palatino;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-family: sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -38,41 +38,63 @@
   a {
     transition: all 0.2s ease;
     display: block;
+    border-bottom: 1px solid transparent;
+  }
+
+  .sidebar {
+    margin-left: 10px;
+    margin-top: 10px;
   }
 
   a:hover {
-    transform: skewX(2deg) skewY(2deg) scale(0.9);
-    text-decoration: none;
+    border-bottom: 1px solid black;
   }
 
   .main__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    height: auto;
-    background: white;
-    transform-origin: bottom left;
+    display: grid;
+    grid-gap: 0;
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 50vh;
+    padding-bottom: 100px;
+
   }
 
-  .main__item {
-    width: 100%;
-    height: 10rem;
+  @media (min-width: 1020px) {
+    .main__wrapper {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .main__wrapper>div {
+    border: 1px solid black;
+
+    margin: 0 -1px -1px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
+  }
+
+  .main__item {
+
+    position: relative;
     text-align: center;
     flex-direction: column;
   }
 
   .main__item p {
     max-width: 200px;
-    margin: 0;
+    margin: 5px;
+  }
+
+  .main__item p.description {
+    font-style: italic;
   }
 
   .main__item p a {
     text-decoration: none;
-    color: black;
+    color: inherit;
   }
 
   .main__item.full {
@@ -81,7 +103,7 @@
   }
 
   .main__item.high {
-    height: 75vh;
+    height: 25vh;
   }
 
   .main__item.full p {
@@ -93,6 +115,21 @@
   .main__item.half {
     width: 100%;
     align-items: center;
+  }
+
+  .main__item_year {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+
+  .main__item_type {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    text-transform: uppercase;
+    font-size: 20px;
+    text-shadow: 0 0 2px black;
   }
 
   hr {
@@ -113,7 +150,7 @@
   }
 
   ul a {
-    color: black;
+    color: inherit;
   }
 
   .award {
@@ -176,26 +213,6 @@
 
   .friday__doll img {
     width: 50px;
-  }
-
-  @media (min-width: 740px) {
-    .main__item {
-      width: 50%;
-      height: 15rem;
-    }
-    .main__item.half {
-      width: 50%;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .main__item {
-      width: 33%;
-      height: 17rem;
-    }
-    .main__item.half {
-      width: 50%;
-    }
   }
 </style>
 {{end}}

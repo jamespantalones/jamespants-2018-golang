@@ -16,28 +16,23 @@
     </a>
   </div>
 
+
+  <div class="sidebar">
+    <p>JAMES PANTS</p>
+    <p>Code (Bloomberg) / Music (Stones Throw) / Radio (NTS)</p>
+  </div>
+
   <main class="main__wrapper">
-
-    <div class="main__item full high">
-      <p class="box">JAMES PANTS</p>
-    </div>
-    <br/>
-    <div class="main__item full">
-      <p>Programmer (Bloomberg)</p>
-      <p>Musican (Stones Throw)</p>
-      <p>Radio Host (NTS)</p>
-    </div>
-
-    <div class="main__item full">
-      <p>WEB</p>
-    </div>
 
 
     {{range .Items}}
     <div class="main__item">
+      <div class="main__item_year">{{.Year}}</div>
+      <div class="main__item_type">{{.Type}}</div>
       <p>
-        <a href="{{.URL}}" target="_blank" rel="noopener noreferrer ">{{.Name}}</a>
+        <a href={{.URL}} target="blank">{{.Title}} ⟶</a>
       </p>
+      <p class="description">{{.Description}}</p>
     </div>
     {{end}}
 

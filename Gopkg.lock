@@ -2,20 +2,23 @@
 
 
 [[projects]]
-  name = "github.com/gorilla/context"
+  name = "github.com/BurntSushi/toml"
   packages = ["."]
-  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
-  version = "v1.1.1"
+  revision = "b26d9c308763d68093482582cea63d69be07a0f0"
+  version = "v0.3.0"
 
 [[projects]]
-  name = "github.com/gorilla/mux"
-  packages = ["."]
-  revision = "e3702bed27f0d39777b0b37b664b6280e8ef8fbf"
-  version = "v1.6.2"
+  branch = "master"
+  name = "github.com/lib/pq"
+  packages = [
+    ".",
+    "oid"
+  ]
+  revision = "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4212248b7f50201de7dd825b9603236a5a9ea952519be13b46e30544213de809"
+  inputs-digest = "b541643ddbc095d4a09dcc4b61d8f93b14166a853a62d621c64b344a78749bc0"
   solver-name = "gps-cdcl"
   solver-version = 1
