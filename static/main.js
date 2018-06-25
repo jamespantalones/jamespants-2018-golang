@@ -5,7 +5,6 @@
 //-----------------------------------------
 
 const LAZIES = document.getElementsByClassName('lazy');
-
 let WIN_HEIGHT = window.innerHeight;
 
 const deferWork = fn => {
