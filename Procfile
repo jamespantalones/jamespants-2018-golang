@@ -1,1 +1,1 @@
-web: james-pants
+web: jamespants-2018-go
