@@ -32,9 +32,58 @@
     </div>
     {{end}}
 
+
+
   </main>
 
+  <div class="centered__row">
+    <p class="upper">Technology</p>
+    <ul>
+      {{range .TechItems.Items}}
+      <li>{{.Name}}</li>
+      {{end}}
+    </ul>
 
+  </div>
+
+
+  <div class="bleed">
+    <img src="static/tweet_tile.jpg" data-src="static/tweet.png" class="lazy" alt="A very famous tweet" />
+  </div>
+
+  <!-- <div class="centered__row music__row">
+    <p class="upper">Cool Music (in no order)</p>
+    <br/>
+    <table>
+      <thead>
+        <tr>
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .MusicItems.Items}}
+        <tr>
+          <td>{{.Artist}}</td>
+          <td>{{.Album}}</td>
+          <td>{{.Year}}</td>
+        </tr>
+        {{end}}
+      </tbody>
+
+    </table>
+
+  </div> -->
+
+
+  <div class="bleed end">
+
+    <img src="static/hat_tile.jpg" data-src="static/hat.jpg" class="lazy" alt="James Pants + James Singleton" />
+  </div>
+
+
+  <script src="/static/main.js"></script>
 </body>
 
 </html>
