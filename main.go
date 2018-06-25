@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
 
 // Main
 func main() {
+
+	port := os.Getenv("PORT")
 
 	fmt.Println("Starting server...")
 
@@ -25,8 +28,6 @@ func main() {
 	// match all routes starting with /static/
 	r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
-	http.ListenAndServe(":8000", r)
-
-	fmt.Println("hi")
+	http.ListenAndServe(port, r)
 
 }
