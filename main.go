@@ -28,6 +28,6 @@ func main() {
 	// match all routes starting with /static/
 	r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
 
-	http.ListenAndServe(port, r)
+	http.ListenAndServe(":"+port, r)
 
 }
