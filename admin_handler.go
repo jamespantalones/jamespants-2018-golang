@@ -96,12 +96,14 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 				case "Description":
 					r.Description = col
 				case "Year":
-					y, err := strconv.Atoi(col)
+					y, err := strconv.ParseFloat(col, 64)
 					if err != nil {
 						fmt.Println("Error converting year to int", col)
 						r.Year = 2018
 					}
-					r.Year = y
+
+					r.Year = int(y)
+
 				case "Type":
 					r.Type = col
 				default:
