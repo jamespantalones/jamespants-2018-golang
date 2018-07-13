@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 /*
@@ -24,7 +23,7 @@ import (
 type Row struct {
 	Title       string `json:"title"`
 	Description string `json:"description,omitempty"`
-	Year        int    `json:"year"`
+	Year        string `json:"year"`
 	Type        string `json:"type"`
 }
 
@@ -96,13 +95,7 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 				case "Description":
 					r.Description = col
 				case "Year":
-					y, err := strconv.Atoi(col)
-					if err != nil {
-						fmt.Println("Error converting year to int", col)
-						r.Year = col
-					}
-
-					r.Year = y
+					r.Year = col
 
 				case "Type":
 					r.Type = col
