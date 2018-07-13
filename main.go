@@ -20,6 +20,7 @@ func main() {
 
 	// handle home page
 	r.HandleFunc("/", GetHandler)
+	r.HandleFunc("/admingos666", AdminHandler).Methods("POST")
 
 	// handle static files
 	staticFileDirectory := http.Dir("./static/")
