@@ -12,6 +12,7 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
+	adminRoute := os.Getenv("ADMIN")
 
 	fmt.Println("Starting server...")
 
@@ -20,7 +21,7 @@ func main() {
 
 	// handle home page
 	r.HandleFunc("/", GetHandler)
-	r.HandleFunc("/admingos666", AdminHandler).Methods("POST")
+	r.HandleFunc(adminRoute, AdminHandler).Methods("POST")
 
 	// handle static files
 	staticFileDirectory := http.Dir("./static/")
