@@ -96,13 +96,13 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 				case "Description":
 					r.Description = col
 				case "Year":
-					y, err := strconv.ParseFloat(col, 64)
+					y, err := strconv.Atoi(col)
 					if err != nil {
 						fmt.Println("Error converting year to int", col)
-						r.Year = 2018
+						r.Year = col
 					}
 
-					r.Year = int(y)
+					r.Year = y
 
 				case "Type":
 					r.Type = col
