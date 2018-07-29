@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"sort"
 )
 
 // Item is Individual Item, whether web or music project
@@ -13,7 +14,7 @@ type Item struct {
 	Description string
 	Title       string
 	URL         template.URL
-	Year        int
+	Year        float64
 	Type        string
 }
 
@@ -45,22 +46,24 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	err2 := json.Unmarshal(dat, &d)
 
 	if err2 != nil {
-		fmt.Println(fmt.Errorf("Error decoding JSON: %v", err))
+		fmt.Println(err2)
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 
 	// Parse template
 	t := template.Must(template.ParseFiles("templates/layout.html", "templates/style.html"))
 
+	items := d.Rows
+
 	// sort slice
-	// sort.Slice(items, func(i, j int) bool {
-	// 	return items[i].Year > items[j].Year
-	// })
+	sort.Slice(items, func(i, j int) bool {
+		return items[i].Year > items[j].Year
+	})
 
 	// create page data for template
 	data := PageData{
 		PageTitle: "James Pants",
-		Items:     d.Rows,
+		Items:     items,
 	}
 
 	// run template
