@@ -95,6 +95,8 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 					r.Title = col.(string)
 				case "Description":
 					r.Description = col.(string)
+				case "URL":
+					r.URL = col.(string)
 				case "Year":
 					r.Year = col.(float64)
 
