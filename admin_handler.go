@@ -23,6 +23,7 @@ import (
 type Row struct {
 	Title       string  `json:"title"`
 	Description string  `json:"description,omitempty"`
+	URL         string  `json:"url"`
 	Year        float64 `json:"year"`
 	Type        string  `json:"type"`
 }
