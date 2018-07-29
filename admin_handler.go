@@ -118,7 +118,7 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// write file
-	werr := ioutil.WriteFile("./data/data.json", out, 0644)
+	werr := ioutil.WriteFile("./static/data.json", out, 0644)
 
 	if werr != nil {
 		fmt.Println(werr)
