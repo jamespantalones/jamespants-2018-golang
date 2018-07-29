@@ -1,35 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
 	"net/http"
-	"path/filepath"
-	"sort"
-
-	"github.com/BurntSushi/toml"
 )
-
-type MusicItem struct {
-	Artist string
-	Album  string
-	Year   int
-}
-
-type MusicItems struct {
-	Items []*MusicItem
-}
-
-// TechItem is individual technology items
-type TechItem struct {
-	Name string
-}
-
-// TechItems is Colleciton of tech items
-type TechItems struct {
-	Items []*TechItem
-}
 
 // Item is Individual Item, whether web or music project
 type Item struct {
@@ -42,86 +19,33 @@ type Item struct {
 
 // PageData is each HTML template struct
 type PageData struct {
-	PageTitle  string
-	Items      []*Item
-	TechItems  *TechItems
-	MusicItems *MusicItems
+	PageTitle string
+	Items     []*Item
+}
+
+// JSONData is main JSON structure
+type JSONData struct {
+	Updated int
+	Rows    []*Item
 }
 
 // GetHandler displays all info
 func GetHandler(w http.ResponseWriter, r *http.Request) {
 
-	//var page PageData
-	var items []*Item
-	var techItems *TechItems
-	var musicItems *MusicItems
+	var d JSONData
 
-	// Get all items in data foler
-	matches, err := filepath.Glob("./data/portfolio/*.toml")
-
-	// Handle error
-	if err != nil {
-		fmt.Println(fmt.Errorf("Error: %v", err))
-		w.WriteHeader(http.StatusInternalServerError)
-	}
-
-	// For each toml file
-	for _, file := range matches {
-		// read the file as bytes
-		b, err := ioutil.ReadFile(file)
-
-		// Handle error
-		if err != nil {
-			fmt.Println(fmt.Errorf("Error: %v", err))
-			w.WriteHeader(http.StatusInternalServerError)
-		}
-
-		// Create an Item
-		var itemX Item
-
-		// Coerce to string
-		str := string(b)
-
-		// Decode TOML
-		if _, err := toml.Decode(str, &itemX); err != nil {
-			fmt.Println(fmt.Errorf("Error: %v", err))
-			w.WriteHeader(http.StatusInternalServerError)
-		}
-
-		// append item
-		items = append(items, &itemX)
-
-	}
-
-	// read tech
-	te, err := ioutil.ReadFile("./data/tech/tech.toml")
+	// get json file
+	dat, err := ioutil.ReadFile("./static/data.json")
 
 	if err != nil {
-		fmt.Println(fmt.Errorf("Error: %v", err))
+		fmt.Println(fmt.Errorf("Error fetching data file: %v", err))
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 
-	// Convert tech to string
-	techStr := string(te)
+	err2 := json.Unmarshal(dat, &d)
 
-	// Decode tech as toml
-	if _, err := toml.Decode(techStr, &techItems); err != nil {
-		fmt.Println(fmt.Errorf("Error: %v", err))
-		w.WriteHeader(http.StatusInternalServerError)
-	}
-
-	// read music
-	me, err := ioutil.ReadFile("./data/music/music.toml")
-
-	if err != nil {
-		fmt.Println(fmt.Errorf("Error: %v", err))
-		w.WriteHeader(http.StatusInternalServerError)
-	}
-
-	musicStr := string(me)
-
-	if _, err := toml.Decode(musicStr, &musicItems); err != nil {
-		fmt.Println(fmt.Errorf("Error: %v", err))
+	if err2 != nil {
+		fmt.Println(fmt.Errorf("Error decoding JSON: %v", err))
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 
@@ -129,16 +53,14 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("templates/layout.html", "templates/style.html"))
 
 	// sort slice
-	sort.Slice(items, func(i, j int) bool {
-		return items[i].Year > items[j].Year
-	})
+	// sort.Slice(items, func(i, j int) bool {
+	// 	return items[i].Year > items[j].Year
+	// })
 
 	// create page data for template
 	data := PageData{
-		PageTitle:  "James Pants",
-		Items:      items,
-		TechItems:  techItems,
-		MusicItems: musicItems,
+		PageTitle: "James Pants",
+		Items:     d.Rows,
 	}
 
 	// run template
