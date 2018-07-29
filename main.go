@@ -44,7 +44,7 @@ func main() {
 	staticFileHandler := http.StripPrefix("/static/", http.FileServer(staticFileDirectory))
 
 	// match all routes starting with /static/
-	r.PathPrefix("/static/").Handler(staticFileHandler).Methods("GET")
+	r.PathPrefix("/").Handler(staticFileHandler).Methods("GET")
 
 	httpsRouter := RedirectToHTTPSRouter(r)
 

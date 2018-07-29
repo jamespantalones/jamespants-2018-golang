@@ -60,7 +60,7 @@ function start() {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/static/sw.js').then(
+    navigator.serviceWorker.register('/sw.js').then(
       registration => {},
       err => {
         console.log('Service worker failed to register', err);
