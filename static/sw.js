@@ -5,7 +5,15 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache
-        .addAll(['/', '/index.html', '/hat_tile.jpg', '/hat.jpg', '/main.js'])
+        .addAll([
+          '/',
+          '/index.html',
+          '/hat_tile.jpg',
+          '/hat.jpg',
+          '/tweet_tile.jpg',
+          '/tweet.png',
+          '/main.js'
+        ])
         .then(() => self.skipWaiting());
     })
   );
