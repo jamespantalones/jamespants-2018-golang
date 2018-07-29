@@ -1,7 +1,8 @@
 {
   "name": "James Pants",
-  "short_name": "Pants",
-  "start_url": ".",
+  "short_name": "James Pants",
+  "start_url": "/?homescreen=1",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#fff",
