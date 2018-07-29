@@ -36,6 +36,7 @@ func main() {
 
 	// handle home page
 	r.HandleFunc("/", GetHandler)
+	r.HandleFunc("/index.html", GetHandler)
 	r.HandleFunc(adminRoute, AdminHandler).Methods("POST")
 
 	// handle static files
