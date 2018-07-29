@@ -39,12 +39,8 @@ func main() {
 	r.HandleFunc("/index.html", GetHandler)
 	r.HandleFunc(adminRoute, AdminHandler).Methods("POST")
 
-	// handle static files
-	staticFileDirectory := http.Dir("./static/")
-	staticFileHandler := http.StripPrefix("/static/", http.FileServer(staticFileDirectory))
-
 	// match all routes starting with /static/
-	r.PathPrefix("/").Handler(staticFileHandler).Methods("GET")
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static")))
 
 	httpsRouter := RedirectToHTTPSRouter(r)
 
