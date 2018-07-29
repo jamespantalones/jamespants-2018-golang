@@ -37,7 +37,7 @@ type Final struct {
 type Request struct {
 	Body struct {
 		Updated int
-		Rows    [][]string
+		Rows    [][]interface{}
 	}
 }
 
@@ -87,18 +87,18 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 
 		for i, col := range row {
 			if index == 0 {
-				keys = append(keys, col)
+				keys = append(keys, col.(string))
 			} else {
 				switch keys[i] {
 				case "Title":
-					r.Title = col
+					r.Title = col.(string)
 				case "Description":
-					r.Description = col
+					r.Description = col.(string)
 				case "Year":
-					r.Year = col
+					r.Year = col.(float64)
 
 				case "Type":
-					r.Type = col
+					r.Type = col.(string)
 				default:
 					fmt.Println("Missing")
 				}
@@ -118,7 +118,7 @@ func AdminHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// write file
-	werr := ioutil.WriteFile("./static/data.json", out, 0644)
+	werr := ioutil.WriteFile("./data/data.json", out, 0644)
 
 	if werr != nil {
 		fmt.Println(werr)
