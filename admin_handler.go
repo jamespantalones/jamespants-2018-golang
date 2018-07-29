@@ -21,10 +21,10 @@ import (
 
 // Row is the final row type
 type Row struct {
-	Title       string `json:"title"`
-	Description string `json:"description,omitempty"`
-	Year        int    `json:"year"`
-	Type        string `json:"type"`
+	Title       string  `json:"title"`
+	Description string  `json:"description,omitempty"`
+	Year        float64 `json:"year"`
+	Type        string  `json:"type"`
 }
 
 // Final is returned data
