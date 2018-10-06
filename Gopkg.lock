@@ -2,23 +2,16 @@
 
 
 [[projects]]
-  name = "github.com/BurntSushi/toml"
+  digest = "1:ccfa094742ce1c97fd3f6481e1bf98f3d9862510eee2bc0eb56e2745396bd330"
+  name = "github.com/julienschmidt/httprouter"
   packages = ["."]
-  revision = "b26d9c308763d68093482582cea63d69be07a0f0"
-  version = "v0.3.0"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/lib/pq"
-  packages = [
-    ".",
-    "oid"
-  ]
-  revision = "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
+  pruneopts = "UT"
+  revision = "8c199fb6259ffc1af525cc3ad52ee60ba8359669"
+  version = "v1.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b541643ddbc095d4a09dcc4b61d8f93b14166a853a62d621c64b344a78749bc0"
+  input-imports = ["github.com/julienschmidt/httprouter"]
   solver-name = "gps-cdcl"
   solver-version = 1

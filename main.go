@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
-	"github.com/gorilla/mux"
+	"github.com/jamespantalones/jamespants-2018-go/api"
+	"github.com/julienschmidt/httprouter"
 )
 
 // RedirectToHTTPSRouter enforces HTTPS
@@ -26,24 +26,22 @@ func RedirectToHTTPSRouter(next http.Handler) http.Handler {
 // Main
 func main() {
 
-	port := os.Getenv("PORT")
-	adminRoute := os.Getenv("ADMIN")
+	// port := os.Getenv("PORT")
+	// adminRoute := os.Getenv("ADMIN")
 
 	fmt.Println("Starting server...")
 
 	// declare new router
-	r := mux.NewRouter()
+	router := httprouter.New()
 
 	// handle home page
-	r.HandleFunc("/", GetHandler)
-	r.HandleFunc("/index.html", GetHandler)
-	r.HandleFunc(adminRoute, AdminHandler).Methods("POST")
+	router.GET("/", api.GetHandler)
+	router.GET("/index.html", api.GetHandler)
+	router.ServeFiles("/static/*filepath", http.Dir("static"))
+	// router.POST(adminRoute, api.AdminHandler)
 
-	// match all routes starting with /static/
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static")))
+	// httpsRouter := RedirectToHTTPSRouter(router)
 
-	httpsRouter := RedirectToHTTPSRouter(r)
-
-	log.Fatal(http.ListenAndServe(":"+port, httpsRouter))
+	log.Fatal(http.ListenAndServe(":8080", router))
 
 }
